@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤫</title>
+    <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: pink;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .livro {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .pg {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .pg-active {
+      display: block;
+    }
+
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff6b81;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff4d6d;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .coracao {
+      position: fixed;
+      top: -30px;
+      font-size: 1.5rem;
+      color: #ff6b81;
+      opacity: 0.8;
+      animation: cair 5s linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(30px);
+        opacity: 0;
+      }
+    }
+.fotos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 20px;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.foto {
+  width: 100%;
+  max-width: 100px;
+  border: 8px solid white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  opacity: 0.95;
+  animation: balanco 4s ease-in-out infinite alternate;
+}
+
+
+@keyframes balanco {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(4deg); }
+}
+
+.progress-container {
+  width: 100%;
+  height: 30px;
+  background: #ffe6e6;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #ff4d6d;
+  transition: width 0.2s linear;
+}
+
+.transbordo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.transbordo::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ff4d6d;
+  border-radius: 50%;
+  top: calc(50% + 15px);
+  left: calc(50% + 180px);
+  transform: translate(-50%, -50%) scale(1);
+  animation: jorrar 2s ease-out forwards;
+  z-index: 998;
+}
+
+
+@keyframes jorrar {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(50);
+    opacity: 1;
+  }
+}
+
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+.splash {
+  position: fixed;
+  background: #ff4d6d;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  width: 100px; /* tamanho inicial pequeno */
+  height: 100px;
+  transform-origin: center center;
+  transform: scale(0);
+  z-index: 999;
+  transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+.splash.ativo {
+  opacity: 1;
+  transform: scale(30); /* escala suficiente para cobrir a tela toda */
+}
+
+
+@keyframes splashAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(60);
+    opacity: 1;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="fotos">
+  <img src="images/foto1.jpeg" class="foto f1" alt="Foto 1">
+  <img src="images/foto2.jpeg" class= "foto f2" alt="Foto 2">
+  <img src="images/foto3.jpeg" class="foto f3" alt="Foto 3">
+  <img src="images/foto4.jpeg" class="foto f4" alt="Foto 4">
+  <img src="images/foto5.jpeg" class="foto f5" alt="Foto 5">
+  <img src="images/foto6.jpeg" class="foto f6" alt="Foto 6">
+  <img src="images/foto7.jpeg" class="foto f7" alt="Foto 7">
+  <img src="images/foto8.jpeg" class="foto f8" alt="Foto 8">
+  <img src="images/foto9.jpeg" class="foto f9" alt="Foto 9">
+</div>
+
+    <div class="livro">
+        <div class="pg pg-active"> 
+        <h1>Então...</h1>
+        <p>Fiz essa pequena página especialmente para você</p>
+        <button onclick="proxpg()">Clique aqui!</button>    
+    </div>
+
+    <div class="pg">
+        <h2>Como começou</h2>
+        <p>Marcela, desde que eu te vi pela primeira vez,
+        percebi o quanto você era diferente.
+        E desde então, sempre imaginei como seria te conhecer melhor...
+        e cá estamos. Sou muito grato a Deus, por ter me dado a oportunidade
+        de conhecer você e ser amado por você!
+    </p>
+    <button onclick="proxpg()">Próxima</button> 
+    </div>
+
+    <div class="pg">
+    <h2>Momentos Especiais</h2>
+    <p>Seria difícil falar sobre todos os momentos especiais
+    num programa pequeno como este, pois, cada momento ao seu lado é incrível,
+    cada momento ao seu lado é extremamente especial e único para mim...
+    eu poderia falar sobre o beijo do açaí, sobre o cinema do 4° fantástico, sobre o churrasco da empresa, e etc...
+    mas, nenhum momento vai ser tão especial quanto o momento em que você confessou os seus sentimentos por mim, naquela carta
+    você não tem noção do quanto aquilo foi especial e importante para mim, eu me senti amado de uma maneira incrível! Obrigado.
+    </p>
+    <button onclick="proxpg()">Próxima</button> 
+</div>
+
+<div class="pg">
+    <h2>O futuro...</h2>
+    <p>Eu sei que pode parecer meio emocionado, pensar nisso, porém,
+        não posso negar que eu imagino uma vida inteira ao seu lado,
+        eu quero ser seu, pra sempre, quero ser seu namorado, marido,
+        quero estar ao seu lado pro resto da minha vida,
+        você é uma garota incrível, e merece tudo do bom e melhor,
+        eu espero que, nosso futuro seja incrível, e se por algum acaso,
+        eu não esteja presente no seu futuro, quero que ainda assim, seu futuro seja incrível e brilhante,
+        pq você merece ser a garota mais feliz do mundo.
+        
+        Um dia, se Deus quiser, eu ainda vou te ver no altar, como minha esposa!
+    </p>
+    <button onclick="proxpg()">Próxima</button> 
+</div>
+
+<div class="pg">
+<h2>O que você é para mim...</h2>
+<p>Marcela, para mim, você é simplesmente a garota mais perfeita do mundo,
+    você é incrível, e não me canso de dizer, você é bonita, esforçada, inteligente,
+    gentil, tem um coração enorme, e é extremamente carinhosa, eu amo tudo em você,
+    amo cada parte do seu corpo, cada detalhe da sua personalidade, eu amo TUDO em você,
+    não há nada nesse mundo que supere a grandiosidade da sua beleza, não só física, mas também,
+    a beleza da sua personalidade e jeito... 
+
+    Você é única, nunca deixe que te digam nada diferente disso,
+    você dá o seu melhor, em tudo que faz, você é minha grande inspiração,
+    você me faz querer ser uma pessoa melhor, você faz com que eu me sinta amado,
+    você faz com que eu me sinta especial para alguém, eu realmente sou muito grato por ter você na minha vida.
+</p>
+<button onclick="proxpg()">Próxima</button> 
+</div>
+
+<div class="pg">
+<h2>Pq eu fiz isso?</h2>
+<p> Eu fiz este simples programa, de coração, para poder expressar o que eu sinto por você,
+    pra poder expressar algumas coisas que eu sempre quis dizer,
+    pra que você saiba que, eu me importo com você e que sempre estou pensando em você,
+    eu fiz isso, para poder demonstrar uma parcela desse imenso amor que sinto por ti. (embora não represente nem 0,001% do amor que sinto)
+    você merece tudo do bom e do melhor, e por isso eu quero melhorar, para que assim, eu possa ser o melhor para você!
+</p>
+<button onclick="proxpg()">Próxima</button> 
+</div>
+ <div class="pg" id="pg-final">
+  <h2>O quanto eu te amo...</h2>
+<div class="progress-container">
+  <div class="progress-bar" id="progress-bar"></div>
+</div>
+</div>
+</div>
+
+<script>
+    let currentPage = 0;
+const pages = document.querySelectorAll(".pg");
+
+function proxpg() {
+  pages[currentPage].classList.remove("pg-active");
+  currentPage = (currentPage + 1) % pages.length;
+  pages[currentPage].classList.add("pg-active");
+
+    if (pages[currentPage].id === "pg-final") {
+    iniciarProgresso();
+  }
+}
+
+function voltar() {
+  pages[currentPage].classList.remove("pg-active");
+  currentPage = 0;
+  pages[currentPage].classList.add("pg-active");
+}
+
+function criarcoracao() {
+  const coracao = document.createElement("div");
+  coracao.classList.add("coracao");
+  coracao.innerHTML = "❤️";
+
+  coracao.style.left = Math.random() * 100 + "vw";
+  coracao.style.fontSize = (1 + Math.random() * 1.5) + "rem";
+  coracao.style.animationDuration = (4 + Math.random() * 3) + "s";
+
+  document.body.appendChild(coracao);
+
+  setTimeout(() => {
+    coracao.remove();
+  }, 7000);
+}
+
+setInterval(criarcoracao, 300);
+
+function iniciarProgresso() {
+  const bar = document.getElementById("progress-bar");
+  let width = 0;
+  const interval = setInterval(() => {
+    if (width >= 100) {
+      clearInterval(interval);
+      mostrarTransbordo();
+    } else {
+      width++;
+      bar.style.width = width + "%";
+    }
+  }, 30);
+}
+function mostrarTransbordo() {
+  const progressBar = document.getElementById("progress-bar");
+  const barRect = progressBar.getBoundingClientRect();
+
+  const splash = document.createElement("div");
+  splash.className = "splash";
+
+  // Posiciona no centro vertical da barra, na ponta direita (fim da barra)
+  splash.style.left = `${barRect.right}px`;
+  splash.style.top = `${barRect.top + barRect.height / 2}px`;
+
+  document.body.appendChild(splash);
+
+  // Pequeno delay para garantir que a classe vai ser aplicada após o elemento estar no DOM
+  setTimeout(() => {
+    splash.classList.add("ativo");
+  }, 50);
+}
+
+</script>
+</body>
+</html>
